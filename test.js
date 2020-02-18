@@ -1,18 +1,7 @@
 var http = require('http');
-var fs = require('fs');
-
-const PORT = process.env.PORT;
-// Chargement du fichier index.html affiché au client
+const PORT = process.env.PORT ||8080;
 var server = http.createServer(function(req, res) {
-fs.readFile('./index.html', 'utf-8', function(error, content) {
 res.writeHead(200, {"Content-Type": "text/html"});
-res.end(content);
+res.end('<p>Voici un paragraphe <strong>HTML</strong> !</p>');
 });
-});
-// Chargement de socket.io
-var io = require('socket.io').listen(server);
-// Quand on client se connecte, on le note dans la console
-io.sockets.on('connection', function (socket) {
-console.log('Un client est connecté !');
-});
-server.listen(PORT);
+server.listen(8080);
